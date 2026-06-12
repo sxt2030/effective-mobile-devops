@@ -34,7 +34,7 @@ The client sends a request to Nginx on port 80. Nginx proxies the request to the
 ### Run
 
 ```bash
-git clone https://gitlab.com/maxpack2030/effective-mobile-devops.git
+git clone https://github.com/sxt2030/effective-mobile-devops.git
 cd effective-mobile-devops
 docker compose up -d
 
