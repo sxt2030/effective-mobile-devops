@@ -54,10 +54,9 @@ docker compose down
 
 ### How It Works
 
-Backend — a minimal Python HTTP server. Listens on port 8080 and responds with "Hello from Effective Mobile!" to any GET request to /.
+Backend — a minimal Python HTTP server. Listens on port 8080 and responds with "Hello from Effective Mobile!" to any GET request to /. Runs as non-root user "appuser".
 
-Nginx — accepts incoming connections on port 80 and proxies them to the backend via the proxy_pass http://backend:8080 directive. The hostname backend is resolved by Docker to the container's IP address.
+Nginx — accepts incoming connections on port 80 and proxies them to the backend via the proxy_pass http://backend:8080 directive. The hostname backend is resolved by Docker to the container's IP address. Configuration is mounted as read-only.
 
-Docker Compose — starts both services on the same network. Only port 80 (Nginx) is exposed to the host. The backend remains accessible exclusively within the Docker network.
-
+Docker Compose — starts both services on an isolated bridge network "app-network". Only port 80 (Nginx) is exposed to the host. The backend remains accessible exclusively within the Docker network.
 
