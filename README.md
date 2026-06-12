@@ -1,0 +1,63 @@
+# Effective Mobile — DevOps Test Task
+
+A simple web application deployed in Docker containers with Nginx as a reverse proxy.
+
+## Architecture
+
+Client (curl) --> [Port 80] --> Nginx (proxy) --> [Docker Network :8080] --> Backend (Python)
+
+The client sends a request to Nginx on port 80. Nginx proxies the request to the backend inside an isolated Docker network. The backend listens on port 8080 and is not directly accessible from the host.
+
+## Tech Stack
+
+- **Backend** — Python 3.12 (built-in `http.server` module)
+- **Reverse Proxy** — Nginx (official Alpine image)
+- **Containerization** — Docker + Docker Compose
+
+## Project Structure
+.
+├── backend/
+│ ├── Dockerfile # Python image build
+│ └── app.py # HTTP server in Python
+├── nginx/
+│ └── nginx.conf # Reverse proxy configuration
+├── docker-compose.yml # Service orchestration
+└── README.md
+
+## Quick Start
+
+### Prerequisites
+
+- Docker 20.10+
+- Docker Compose 2.0+
+
+### Run
+
+```bash
+git clone <repository-url>
+cd effective-mobile-devops
+docker compose up -d
+docker compose ps
+
+
+### Verify
+
+curl http://localhost
+Expected output:
+Hello from Effective Mobile!
+
+
+### Stop
+
+docker compose down
+
+
+### How It Works
+
+Backend — a minimal Python HTTP server. Listens on port 8080 and responds with "Hello from Effective Mobile!" to any GET request to /.
+
+Nginx — accepts incoming connections on port 80 and proxies them to the backend via the proxy_pass http://backend:8080 directive. The hostname backend is resolved by Docker to the container's IP address.
+
+Docker Compose — starts both services on the same network. Only port 80 (Nginx) is exposed to the host. The backend remains accessible exclusively within the Docker network.
+
+
