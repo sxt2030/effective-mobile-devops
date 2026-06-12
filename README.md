@@ -34,16 +34,16 @@ The client sends a request to Nginx on port 80. Nginx proxies the request to the
 ### Run
 
 ```bash
-git clone <repository-url>
+git clone https://gitlab.com/maxpack2030/effective-mobile-devops.git
 cd effective-mobile-devops
 docker compose up -d
-docker compose ps
-
 
 ### Verify
 
+docker compose ps
 curl http://localhost
-Expected output:
+
+#Expected output:
 Hello from Effective Mobile!
 
 
