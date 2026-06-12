@@ -60,3 +60,14 @@ Nginx — accepts incoming connections on port 80 and proxies them to the backen
 
 Docker Compose — starts both services on an isolated bridge network "app-network". Only port 80 (Nginx) is exposed to the host. The backend remains accessible exclusively within the Docker network.
 
+### Security
+
+No secrets — no passwords, tokens, or keys in the repository
+
+Non-root backend — backend runs as appuser
+
+Minimal exposure — only port 80 exposed to the host, backend is network-isolated
+
+Read-only mounts — Nginx config mounted as :ro
+
+Server tokens off — Nginx version hidden from error pages and headers
